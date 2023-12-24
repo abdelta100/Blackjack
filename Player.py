@@ -1,4 +1,4 @@
-from Blackjack import scorer
+from BlackjackHelper import scorer
 
 
 class Player():
@@ -36,4 +36,8 @@ class Player():
 
 class Dealer(Player):
     def __init__(self, name='dealer'):
+        super().__init__(name)
+
+class Computer(Player):
+    def __init__(self, name='Computer'):
         super().__init__(name)

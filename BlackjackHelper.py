@@ -1,36 +1,31 @@
-def scorer(cards):
-    numeros = [card.split(" ")[0] for card in cards]
-    score = 0
-    for number in numeros:
-        if number in ["J", "Q", "K"]:
-            score += 10
-        elif number == "A":
-            score += 1
-        else:
-            score += int(number)
+from Deck import Card
 
-        if "A" in numeros and score <= 11:
+
+def scorer(cards: list[Card]):
+    # numeros = [card.split(" ")[0] for card in cards]
+    score = 0
+    for card in cards:
+        score += card.value
+        if card.number == 'A' and score <= 11:
             score += 10
 
     return score
 
 
 def winnerPayoff(player, dealer, stake):
-    if player.score > dealer.score and player.score <= 21:
-        winner = player
-        payoff = [stake, -stake]
-    elif dealer.score > player.score and dealer.score <= 21:
+    if player.score <= 21:
+        if player.score > dealer.score or dealer.score > 21:
+            winner = player
+        elif player.score < dealer.score:
+            winner = dealer
+        else:
+            winner = None
+    elif player.score > 21 >= dealer.score:
         winner = dealer
-        payoff = [-stake, stake]
-    elif dealer.score <= 21 and player.score > 21:
-        winner = dealer
-        payoff = [-stake, stake]
-    elif player.score <= 21 and dealer.score > 21:
-        winner = player
-        payoff = [stake, -stake]
     else:
         winner = None
-        payoff = [0, 0]
+
+    payoff = {player: [stake, -stake], dealer: [-stake, stake], None: [0, 0]}[winner]
 
     return winner, payoff
 
