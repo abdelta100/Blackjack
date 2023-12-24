@@ -1,3 +1,5 @@
+import random
+
 from BlackjackHelper import scorer
 
 
@@ -41,3 +43,16 @@ class Dealer(Player):
 class Computer(Player):
     def __init__(self, name='Computer'):
         super().__init__(name)
+
+    def turn(self, deck):
+        choice=self.makeDecision()
+        if choice == "Draw" or choice == 'draw':
+            self.drawCard(deck)
+        else:
+            self.roundPlay = False
+
+    def makeDecision(self):
+        # using random decision for now
+        dec = random.randint(0,1)
+        choice = {0: "Stop", 1: "Draw"}[dec]
+        return choice
