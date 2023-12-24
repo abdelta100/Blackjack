@@ -159,3 +159,4 @@ def roundAuto(dealer, player, deck):
         print("Dealer Bank: " + str(dealer.bank))
 
     print("\n<<<<<<<<<<<<<< ROUND END >>>>>>>>>>>>>>>>>\n")
+    return winner

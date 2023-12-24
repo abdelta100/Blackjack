@@ -2,6 +2,8 @@ import random
 
 
 class Deck():
+    #TODO multiple decks in game with replacement,
+    # also maybe figure out a way to prevent all cards being consumed
 
     def __init__(self):
         self.Cards = self.createNewDeck()

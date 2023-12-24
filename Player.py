@@ -12,6 +12,7 @@ class Player():
         self.roundPlay = True
 
     def drawCard(self, Deck):
+        #TODO non replacing draw
         self.hand.append(Deck.drawCard())
         self.scorer()
 
@@ -48,11 +49,21 @@ class Computer(Player):
         choice=self.makeDecision()
         if choice == "Draw" or choice == 'draw':
             self.drawCard(deck)
+            print("\nPlayer chose to draw another card\n")
         else:
             self.roundPlay = False
+            print("\nPlayer chose to stop drawing more cards\n")
 
     def makeDecision(self):
         # using random decision for now
-        dec = random.randint(0,1)
+        #dec = random.randint(0,1)
+        dec = self.decisionmethod1()
         choice = {0: "Stop", 1: "Draw"}[dec]
         return choice
+
+    def decisionmethod1(self):
+        meanExpectation = 81/13
+        if self.score < 21-meanExpectation:
+            return 1
+        else:
+            return 0
